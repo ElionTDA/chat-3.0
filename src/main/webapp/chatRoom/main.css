@@ -1,0 +1,15 @@
+body {
+    background-color: cyan;
+}
+
+#chat {
+	margin: 2%;
+}
+
+#ban {
+	margin: 2%;
+}
+
+button {
+	padding: 2%;
+}
