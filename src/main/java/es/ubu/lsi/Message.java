@@ -10,12 +10,13 @@ public class Message {
 	private User user;
 	
 	public Message(User user, String mensaje){
+		dateMessage = new SimpleDateFormat();
 		this.user = user;
 		this.message = mensaje;
 	}
 	
 	public String createMessage() {
-		dateMessage = new SimpleDateFormat();
+		// TODO poner segundos a la fecha
 		String date = dateMessage.format(new Date());
 		return date + ": " + user.getNick() + "> " + message; 
 	}

@@ -1,3 +1,7 @@
+<%@page import="es.ubu.lsi.Message"%>
+<jsp:useBean id="server" class="es.ubu.lsi.Server" scope="application" />
+<jsp:useBean id="user" class="es.ubu.lsi.User" scope="session" />
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,10 +12,19 @@
     <body>
         <h1>Sala de chat de usuario</h1>
         <div id="chat">
+        	<div>
+        		<%
+        		for (Message mess: user.getMessageList()){
+        			%>
+        			<span><%= mess.createMessage() %></span><br>
+        			<%
+        		}
+        		%>
+        	</div>
             <form method="post" action="sendMensaje.jsp">
 			    <textarea id="textarea" rows="10" cols="50" name="mensaje" ></textarea> <br>
 			    <input type="text" name="message">
-			    <input type="button" value="Enviar">
+			    <input type="submit" value="Enviar">
 			    <input type="reset"  value="Borrar" > 
             </form> 
         </div>

@@ -11,9 +11,10 @@ Vas a mandar un mensaje! SOPUTO!
 
 	// Tratamos los mensajes.
 	String m = request.getParameter("message");
+
 	if(m != null){
 		Message message = new Message(user, m);
 		server.sendMensaje(message);
 	}
-	
 %>
+<jsp:forward page="chatRoom.jsp"></jsp:forward>

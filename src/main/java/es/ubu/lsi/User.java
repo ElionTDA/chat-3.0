@@ -27,4 +27,12 @@ public class User {
 	public List<Message> getMessageList(){
 		return messageList;
 	}
+	
+	public String toStringMessages(){
+		String result = "";
+		for(Message m: messageList){
+			result = result + m.createMessage() + " ";
+		}
+		return result;
+	}
 }

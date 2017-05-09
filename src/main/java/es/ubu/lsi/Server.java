@@ -10,7 +10,7 @@ public class Server {
 	
 	public Server(){
 		bans = new HashMap<User, List<User>>();
-		users = new ArrayList<User>();
+		users = new ArrayList<User>();	
 	}
 	
 	public void addUser(User user){
@@ -82,11 +82,24 @@ public class Server {
 	 */
 	public void sendMensaje(Message message){
 		User sender = message.gerUser();
+		
+		boolean banned;
 		for (User u: users){
-			if(u != sender){
-				if(!bans.get(sender).contains(u) && !bans.get(u).contains(sender)){
-					u.recibeMessage(message);
+			banned = false;
+			
+			if(bans.containsKey(sender)){
+				if(bans.get(sender).contains(u)){
+					banned = true;
 				}
+			}
+			if(bans.containsKey(u)){
+				if(bans.get(u).contains(sender)){
+					banned = true;
+				}
+			}
+			
+			if(!banned){
+				u.recibeMessage(message);
 			}
 		}
 	}
