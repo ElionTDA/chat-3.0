@@ -1,55 +1,88 @@
 
-<%@page import="java.util.Locale.Category"%>
 <jsp:useBean id="server" class="es.ubu.lsi.Server" scope="application" />
 <jsp:useBean id="user" class="es.ubu.lsi.User" scope="session" />
 
-<%
-	// En el caso de que el usuario no sea nulo, y su nick ni sea nulo ni este vacio,
-	// es que se trata de un usuario registrado, y un usuario registrado no puede entrar
-	// al login. (Redirigir a ChatRoom).
-	if(user != null && user.getNick().equals(null)){
-		%>
-		<jsp:forward page="chatRoom.jsp" />
-		<%
-	}
-%>
 
 <!-- Si un usuario no registrado intenta acceder directamente a login.jsp sin pasar por index.jsp
 se le echa para atrás -->
-<%! String nickname = ""; %>
-<%
-	
-	try{
-	nickname = request.getParameter("nickname");
-	} catch(Exception e){
-		System.out.println("PeneSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSs");
-	}
+
+
+<%	
+	// Leemos el nick que se recibe del request.
+	String nickname = request.getParameter("nickname");
+	// Comprobamos que se haya introducido nick y no exista ya en la base.
+
+	// TODO comprobar cosas como si el nick es null, esta vacio, o no tiene el sufiiciente tamaño.
 	System.out.println(nickname);
-	//TODO comprobar que el tamaño sea minimo x, y que no haya espacios o caracteres raros.
-	if(nickname.equals(null) || nickname.equals("")){
-		
-	}
-%>
-<jsp:setProperty name="user" property="nick" value="<%=request.getParameter("nickname")%>" />
-
-El nombre de usuario es: <%= user.getNick() %>
-
-<% 
 	System.out.println(user.getNick());
-	if(server.existUser(user)){
-		System.out.println("El usuario existe.");
-		session.removeAttribute("user");
-		%>
-		
-		<jsp:forward page="index.jsp">
-		 	<jsp:param value="El nombre de usuario existe." name="nickExist"/>
-		</jsp:forward>
-		
-		<%
-	} else {
-		server.addUser(user);
-		System.out.println("NO EXISTE.");
-	}
+	
+	// Si el nick es nulo. Vemos si hay un usuario en session o no.
+	if(nickname == null){
+		// Si no hay un usuario en sesion
+		if(user.getNick() == null){
+			// Redirigimos a index.jsp, con Acceso no permitido.
+			%>
+			<jsp:forward page="index.jsp">
+			 	<jsp:param value="Acceso no permitido." name="status"/>
+			</jsp:forward>
+			<%	
+			
+		// Si hay un usuario en sesion
+		} else {
+			// Redirigimos a chatRoom, con Ya estas logueado.
+			%>
+			<jsp:forward page="chatRoom.jsp">
+			 	<jsp:param value="Ya estas logueado." name="status"/>
+			</jsp:forward>
+			<%	
+		}
+	// Si el nick no es nulo.
+	} else{
+		// Si el nick existe en el servidor (usuarios activos actualmente)
+		if(server.existNick(nickname)){
+			// Si coincide con el nick de usuario de sesion.
+			if(user.getNick() == nickname){
+				// Redirige a chatRoom, con Ya estas logueado.
+				%>
+				<jsp:forward page="chatRoom.jsp">
+				 	<jsp:param value="Ya estas logueado." name="status"/>
+				</jsp:forward>
+				<%	
+				
+			// Si no coincide con el nick de usuario de sesion.
+			} else {
+				// Redirige a chatRoom, con Ya estas logueado con $nombreUsuario
+				%>
+				<jsp:forward page="chatRoom.jsp">
+				 	<jsp:param value="Ya estas logueado con <%= user.getNick() %>." name="status"/>
+				</jsp:forward>
+				<%	
+			}
+			
+		// Si el nick no existe en el servidor.
+		} else {
+			// Si el usuario de sesion ya tiene nick.
+			if(user.getNick() == nickname){
+				// Redirige a chatRoom, con Ya estas logueado con $nombreUsuario
+				%>
+				<jsp:forward page="chatRoom.jsp">
+				 	<jsp:param value="Ya estas logueado con <%= user.getNick() %>." name="status"/>
+				</jsp:forward>
+				<%	
+				
+			// Si el usuario de sesion no tiene nick
+			} else { 
+				// Registramos al usuario, y redirige a chatRoom.
+				%>
+				<jsp:setProperty name="user" property="nick" value="<%=request.getParameter("nickname")%>" />
+				<%
+				server.addUser(user);
+				%>
+				<jsp:forward page="chatRoom.jsp">
+				 	<jsp:param value="Login con exito." name="status"/>
+				</jsp:forward>
+				<%
+			}
+		}
+	}	
 %>
-<br><br> 
-<%=	server.toStringConnectedUsers() %> 

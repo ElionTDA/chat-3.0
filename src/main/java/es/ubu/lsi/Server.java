@@ -16,14 +16,18 @@ public class Server {
 		users.add(user);
 	}
 	
+	public boolean containsUser(User user){
+		return users.contains(user);
+	}
+	
 	public void removeUser(User user){
 		users.remove(user);
 	}
 	
-	public boolean existUser(User user){
+	public boolean existNick(String nick){
 		// TODO pasar a lowercase para hacer la comparacion Juan y juAN son iguales.
 		for (User u: users){
-			if(user.getNick().equals(u.getNick())){
+			if(nick.equals(u.getNick())){
 				return true;
 			}
 		}
