@@ -1,3 +1,6 @@
+
+<%=request.getParameter("nickExist") %>
+
 <!DOCTYPE html>
 <html>
     <head>
