@@ -6,18 +6,15 @@ import java.util.List;
 
 public class Server {
 	private List<User> users;
-	private HashMap<User, List<User>> bans;
+	private HashMap<User, List<User>> bans;	
 	
 	public Server(){
+		bans = new HashMap<User, List<User>>();
 		users = new ArrayList<User>();
 	}
 	
 	public void addUser(User user){
 		users.add(user);
-	}
-	
-	public boolean containsUser(User user){
-		return users.contains(user);
 	}
 	
 	public void removeUser(User user){
@@ -43,7 +40,7 @@ public class Server {
 	 */
 	public boolean banUser(User user, User banned){
 		boolean flag = false;
-		if(!bans.containsKey(user)){		
+		if(!bans.containsKey(user)){	
 			bans.put(user, new ArrayList<User>());
 		}
 		if(!bans.get(user).contains(banned)){
@@ -78,5 +75,22 @@ public class Server {
 		}
 		return result;
 	}
+	
+	/**
+	 * Si el usuario que manda el mensaje no tiene baneado a otro usuario, y el otro usuario no le tiene baneado a ék
+	 * @param message
+	 */
+	public void sendMensaje(Message message){
+		User sender = message.gerUser();
+		for (User u: users){
+			if(u != sender){
+				if(!bans.get(sender).contains(u) && !bans.get(u).contains(sender)){
+					u.recibeMessage(message);
+				}
+			}
+		}
+	}
+	
+
 	
 }
