@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Server {
 	private List<User> users;
-	private HashMap<User, List<User>> bans;	
+	private HashMap<String, List<String>> bans;	
 	
 	public Server(){
-		bans = new HashMap<User, List<User>>();
+		bans = new HashMap<String, List<String>>();
 		users = new ArrayList<User>();	
 	}
 	
@@ -19,6 +19,15 @@ public class Server {
 	
 	public void removeUser(User user){
 		users.remove(user);
+	}
+	
+	public User getUser(String nick){
+		for (User u: users){
+			if(u.getNick().equals(nick)){
+				return u;
+			}
+		}
+		return null;
 	}
 	
 	public boolean existNick(String nick){
@@ -38,16 +47,17 @@ public class Server {
 	 * @param banned Usuario baneado.
 	 * @return True o false en función de si lo banea o no. (No lo podrá banear si ya lo tiene baneado).
 	 */
-	public boolean banUser(User user, User banned){
+	public boolean banUser(User user, String banned){
+
 		boolean flag = false;
-		if(!bans.containsKey(user)){	
-			bans.put(user, new ArrayList<User>());
+		if(!bans.containsKey(user.getNick())){	
+			bans.put(user.getNick(), new ArrayList<String>());
 		}
-		if(!bans.get(user).contains(banned)){
-			bans.get(user).add(banned);
+		if(!bans.get(user.getNick()).contains(banned)){
+			bans.get(user.getNick()).add(banned);
 			flag = true;
 		}
-		
+		user.recibeMessage(new Message(user, "El usuario " + banned + " ha sido baneado."));
 		return flag;
 	}
 	
@@ -58,11 +68,11 @@ public class Server {
 	 * @param unbanned Usuario desbaneado 
 	 * @return True o false en función de si se desbloquea a un usuario o no. 
 	 */
-	public boolean unbanUser(User user, User unbanned){
+	public boolean unbanUser(User user, String unbanned){
 		boolean flag = false;
-		if(bans.containsKey(user)){		
-			if(bans.get(user).contains(unbanned)){
-				bans.get(user).remove(unbanned);
+		if(bans.containsKey(user.getNick())){		
+			if(bans.get(user.getNick()).contains(unbanned)){
+				bans.get(user.getNick()).remove(unbanned);
 				flag = true;
 			}
 		}
@@ -82,19 +92,19 @@ public class Server {
 	 * @param message
 	 */
 	public void sendMensaje(Message message){
-		User sender = message.gerUser();
+		String sender = message.gerUser().getNick();
 		
 		boolean banned;
 		for (User u: users){
 			banned = false;
 			
 			if(bans.containsKey(sender)){
-				if(bans.get(sender).contains(u)){
+				if(bans.get(sender).contains(u.getNick())){
 					banned = true;
 				}
 			}
-			if(bans.containsKey(u)){
-				if(bans.get(u).contains(sender)){
+			if(bans.containsKey(u.getNick())){
+				if(bans.get(u.getNick()).contains(sender)){
 					banned = true;
 				}
 			}

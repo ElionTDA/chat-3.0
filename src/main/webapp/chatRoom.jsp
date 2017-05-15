@@ -37,8 +37,8 @@
             <form method="post" action="ban-unbanUser.jsp">
                 <br> Ususario <br>
                 <input type="text" name="nickname">
-                <input type="submit" name="ban" value="Bloquear">
-                <input type="submit" name="ban" value="Desbloquear">
+                <input type="submit" name="ban" value="ban">
+                <input type="submit" name="ban" value="unban">
             </form>
         </div>
         <div>
