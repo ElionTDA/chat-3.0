@@ -47,6 +47,7 @@ public class Server {
 			bans.get(user).add(banned);
 			flag = true;
 		}
+		
 		return flag;
 	}
 	

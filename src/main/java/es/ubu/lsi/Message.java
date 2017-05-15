@@ -5,28 +5,28 @@ import java.util.Date;
 
 public class Message {
 
-	private SimpleDateFormat dateMessage;
+	private Date date;
 	private String message;
 	private User user;
 	
 	public Message(User user, String mensaje){
-		dateMessage = new SimpleDateFormat();
+		date = new Date();
 		this.user = user;
 		this.message = mensaje;
 	}
 	
 	public String createMessage() {
 		// TODO poner segundos a la fecha
-		String date = dateMessage.format(new Date());
-		return date + ": " + user.getNick() + "> " + message; 
+		String dateStr = new SimpleDateFormat().format(date);		
+		return dateStr + ": " + user.getNick() + "> " + message; 
 	}
 	
 	public User gerUser(){
 		return user;
 	}
 	
-	public SimpleDateFormat getDateMessage(){
-		return dateMessage;
+	public Date getDateMessage(){
+		return date;
 	}
 	
 	public String getMessage() {
