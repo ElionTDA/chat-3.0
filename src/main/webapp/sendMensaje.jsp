@@ -1,5 +1,3 @@
-Vas a mandar un mensaje! SOPUTO!
-
 <%@page import="es.ubu.lsi.Message"%>
 <jsp:useBean id="server" class="es.ubu.lsi.Server" scope="application" />
 <jsp:useBean id="user" class="es.ubu.lsi.User" scope="session" />

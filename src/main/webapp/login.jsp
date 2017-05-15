@@ -13,8 +13,6 @@ se le echa para atrás -->
 	// Comprobamos que se haya introducido nick y no exista ya en la base.
 
 	// TODO comprobar cosas como si el nick es null, esta vacio, o no tiene el sufiiciente tamaño.
-	System.out.println(nickname);
-	System.out.println(user.getNick());
 	
 	// Si el nick es nulo. Vemos si hay un usuario en session o no.
 	if(nickname == null){

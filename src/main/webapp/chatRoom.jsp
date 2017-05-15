@@ -14,7 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Sala de chat de usuario</h1>
+        <h1>Sala de chat de <%= user.getNick() %></h1>
         <div id="chat">
         	<!-- TODO dar formato a esto, para que muestre los mensajes como se quiere. -->
         	<div>
