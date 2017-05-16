@@ -2,8 +2,18 @@
 <jsp:useBean id="server" class="es.ubu.lsi.Server" scope="application" />
 <jsp:useBean id="user" class="es.ubu.lsi.User" scope="session" />
 
+<% 
+// Comprobamos que el usuario este registrado. 
+if(user.getNick() == null || user.getNick() == ""){
+%>
+	<jsp:forward page="index.jsp">
+		<jsp:param value="Tienes que loguearte primero" name="status"/>
+	</jsp:forward>
 <%
-	// TODO comprobar el acceso a usuarios garantizados.
+}	
+%>
+
+<%
 	
 	// TODO comprobar status, para leer mensajes del sistema en caso de que los haya
 

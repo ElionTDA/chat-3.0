@@ -1,0 +1,174 @@
+*, html, body{
+	margin: 0px;
+	padding:0px;
+}
+html, body{
+	width: 100%;
+	height: 100%;
+}
+body{
+	background-color: #39BF90;
+}
+
+#chatroom-content{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform:translate(-50%,-50%);
+	color: white;
+	font-weight: bold;
+	width: 80%;
+	height:80%;
+	padding: 20px;
+}
+
+#chatroom-chatzone{
+	display:flex;
+	flex-direction:row;
+	height:100%;
+	background-color: #fafbfc;
+	border: solid 1px black;
+	border-radius:10px;
+	box-shadow: 0px 5px 10px #666;
+	padding:5px;
+}
+
+#chat {
+	flex-grow: 18;
+	display:flex;
+	flex-direction: column;
+	justify-content:space-between;
+	padding: 2px;
+	width: 80%;
+}
+#chat form{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+#chat #textarea{
+	color: black;
+	width: 100%;
+	
+	background-color:white;
+	border: 1px solid #666;
+
+	height: 90%;
+	flex-grow: 30;
+	margin-bottom:5px;
+	overflow: auto;
+	word-wrap: break-word;
+}
+#chat form #botonera{
+	display: flex;
+	flex-direction: row;
+	with:100%; 
+	flex-grow:1;
+	
+	background-color: green;
+	box-sizing: border-box;
+}
+#chat form #botonera #message{
+	width: 80%;
+	border: 1px solid #666;
+}	
+#chat form #botonera #buttons{
+	display:flex;
+	flex-direction: row;
+	width: 20%;
+}
+#chat form #botonera #buttons input{
+	width: 50%;
+}
+
+#ban {
+	color: black;
+	width:20%;
+	flx-grow: 1;
+	display: flex;
+	flex-direction: column;
+	align-items:center;
+}
+
+#ban-buttons{
+	margin-top:10px;
+	display:flex;
+	flex-direction: row;
+	align-items: stretch;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	box-sizing: border-box;
+}
+#ban form{
+	height: 20%;
+	box-sizing: border-box;
+}
+#ban form input {
+	border: 1px solid #666;
+}
+#ban-buttons input{
+	width:48%;
+	box-sizing: border-box;
+	
+	border-radius:5px;
+	border:none;
+	color: white; 
+	font-weight: bold;
+	background-color:white;
+	transition: 0.2s linear;
+    background-image: linear-gradient(-180deg, #34d058 0%, #28a745 90%);
+}
+
+#ban-buttons input:hover {
+	background-image: linear-gradient(-180deg, #23b047 0%, #28a745 90%);
+    box-shadow: 0px 5px 10px #888;
+}
+
+#connected-users{
+	margin:0px 5px;
+	width: 100%;
+	height: 80%;
+	margin-top: 20px;
+	box-sizing: border-box;
+}
+
+#user-list{
+	width: 90%;
+	height: 80%;
+	background-color: white;
+	overflow: auto;
+	margin: 0px 5px;
+	border: 1px solid #666;
+	box-sizing: border-box;
+}
+
+
+#logout-button{
+	position: absolute;	
+	left: 70%;
+	top: 0px;
+}
+#logout-button input{
+	transition:font-size 0.3s linear;
+	font-size:16px;
+	width: 200px;
+	height: 40px;
+	border: none;
+	border-left: 1px solid #666;
+	border-right: 1px solid #666;
+	border-bor: 1px solid #666;
+	background-image: linear-gradient(-180deg, #B02323 30%, #C82626 70%);
+	color: white;
+	font-weight:bold;
+	border-radius: 0px 0px 10px 10px;
+}
+
+#logout-button input:hover{
+
+	font-size:20px;
+	background-image: none;
+	background-color: #B32811;
+}

@@ -8,6 +8,10 @@ se le echa para atrás -->
 
 
 <%	
+	// TODO Cambiar esta comprobación, falla si se da para atras con el navegador, y
+	// se vuelve a entrar, (dos veces el mismo usuario)
+
+
 	// Leemos el nick que se recibe del request.
 	String nickname = request.getParameter("nickname");
 	// Comprobamos que se haya introducido nick y no exista ya en la base.

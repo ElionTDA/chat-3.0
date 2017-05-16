@@ -28,6 +28,14 @@ public class User {
 		return messageList;
 	}
 	
+	public String getRefreshMessages(){
+		String res = "";
+		for(Message m: messageList){
+			res += m.createMessage() + "<br>";
+		}
+		return res;
+	}
+	
 	public String toStringMessages(){
 		String result = "";
 		for(Message m: messageList){

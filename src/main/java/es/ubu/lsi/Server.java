@@ -30,6 +30,18 @@ public class Server {
 		return null;
 	}
 	
+	public List<User> getUsersConnected(){
+		return users;
+	}
+	
+	public String refreshUserConnected(){
+		String res = "";
+		for (User u: users){
+			res += u.getNick() + "<br>";
+		}
+		return res;
+	}
+	
 	public boolean existNick(String nick){
 		// TODO pasar a lowercase para hacer la comparacion Juan y juAN son iguales.
 		for (User u: users){
