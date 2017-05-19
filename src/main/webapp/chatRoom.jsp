@@ -1,10 +1,9 @@
-<!-- TODO meter esta cabecera en un fichero común, e importarlo en todos los que se use. -->
+
 <%@page import="es.ubu.lsi.Message"%>
 <jsp:useBean id="server" class="es.ubu.lsi.Server" scope="application" />
 <jsp:useBean id="user" class="es.ubu.lsi.User" scope="session" />
 
 <% 
-// TODO cambiar la comprobación contra el servidor.
 // Comprobamos que el usuario de sesion tenga nick, osea este logueado.
 if(user.getNick() == null || user.getNick() == ""){
 %>
@@ -29,7 +28,6 @@ if(user.getNick() == null || user.getNick() == ""){
 	        <h1>Sala de chat de <%= user.getNick() %></h1>
 	        <div id="chatroom-chatzone">
 		        <div id="chat">
-		        	<!-- TODO dar formato a esto, para que muestre los mensajes como se quiere. -->
 	        		<div id="textarea">
 					    <%
 		        		for (Message mess: user.getMessageList()){
